@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -38,6 +38,7 @@ app.get('/', function homepage(req, res) {
 });
 
 
+
 /*
  * JSON API Endpoints
  */
@@ -46,10 +47,10 @@ app.get('/api', function apiIndex(req, res) {
   // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
   // It would be seriously overkill to save any of this to your database.
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
+    woopsIForgotToDocumentAllMyEndpoints: false, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
-    documentationUrl: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
-    baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
+    documentationUrl: "https://github.com/klawton1/express-personal-api/blob/master/README.md",
+    baseUrl: "https://murmuring-depths-92485.herokuapp.com", // CHANGE ME
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
@@ -57,6 +58,27 @@ app.get('/api', function apiIndex(req, res) {
     ]
   })
 });
+
+app.get('/api/profile', function(req, res){
+  var kody = {
+    name: "Kody Lawton",
+    githubLink: "https://github.com/klawton1",
+    githubImage: "https://avatars3.githubusercontent.com/u/23528010?v=3&s=460",
+    personalSiteLink: "url",
+    currentCity: "San Francisco",
+    pets: "None :("
+  }
+  res.send(kody);
+})
+
+app.get('/api/trucks', function(req, res){
+  db.Truck.find({}, function(err, trucks){
+    if(err){console.log("ERROR!!", err);}
+    console.log(trucks)
+    res.json(trucks)
+  })
+})
+
 
 /**********
  * SERVER *

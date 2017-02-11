@@ -18,7 +18,7 @@
   "homepage": "https://github.com/SF-WDI-LABS/express-personal-api",
   "dependencies": {
     "body-parser": "^1.15.0",
-    "express": "^4.13.4",
-    "mongoose": "^4.4.10"
+    "express": "^4.14.1",
+    "mongoose": "^4.8.1"
   }
 }
