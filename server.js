@@ -77,9 +77,13 @@ app.get('/api/profile', function(req, res){
 app.get('/api/trucks', function(req, res){
   db.Truck.find({}, function(err, trucks){
     if(err){console.log("ERROR!!", err);}
-    var limit = Number(req.query.limit);
-    var trucks = trucks.slice(0, limit);
-    res.json(trucks)
+    if(req.query.limit === undefined){
+      res.json(trucks);
+    }else{
+      var limit = Number(req.query.limit);
+      var trucks = trucks.slice(0, limit);
+      res.json(trucks)
+    }
   })
 })
 
@@ -87,7 +91,6 @@ app.get('/api/trucks/:id', function(req, res){
   var id = req.params.id;
   db.Truck.findOne({_id: id}, function(err, truck){
     if(err){console.log(err);}
-    console.log("FOUND TRUCK BY ID -", id)
     res.json(truck);
   })
 })
@@ -102,7 +105,6 @@ app.post('/api/trucks', function(req, res){
   }
   db.Truck.create(truck, function(err, truck){
     if(err){console.log(err);}
-    console.log("MADE NEW TRUCK -", truck.name);
     res.json("truck");
   })
 })
@@ -117,7 +119,6 @@ app.put('/api/trucks/:id', function(req, res){
       }
     }
     truck.save(function(err, truck){
-      console.log("UPDATED TRUCK", truck.name)
       res.json(truck);
     })
   })
@@ -127,7 +128,6 @@ app.delete('/api/trucks/:id', function(req, res){
   var id = req.params.id;
   db.Truck.findOneAndRemove({_id: id}, function(err, truck){
     if(err){console.log(err);}
-    console.log("REMOVED TRUCK");
     res.sendStatus(204);
   })
 })
