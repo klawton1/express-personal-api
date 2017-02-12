@@ -79,6 +79,54 @@ app.get('/api/trucks', function(req, res){
   })
 })
 
+app.get('/api/trucks/:id', function(req, res){
+  var id = req.params.id;
+  db.Truck.findOne({_id: id}, function(err, truck){
+    if(err){console.log(err);}
+    console.log("FOUND TRUCK BY ID -", id)
+    res.json(truck);
+  })
+})
+
+app.post('/api/trucks', function(req, res){
+  var chef = req.body.headChef;
+  var name = req.body.name;
+  var image = req.body.image;
+  var website = req.body.website;
+  var truck = {
+    headChef: headChef,
+    name: name,
+    website: website
+  }
+  db.Truck.create(truck, function(err, truck){
+    if(err){console.log(err);}
+    console.log("MADE NEW TRUCK -", truck.name);
+    res.json(truck);
+  })
+})
+
+app.put('/api/trucks/:id', function(req, res){
+  var id = req.params.id;
+  db.Truck.findOne({_id: id}, function(err, truck){
+    truck.headChef = req.body.chef;
+    truck.name = req.body.name;
+    truck.website = req.body.website
+    truck.save(function(err, truck){
+      console.log("UPDATED TRUCK", truck.name)
+      res.json(truck);
+    })
+  })
+})
+
+app.delete('/api/trucks/:id', function(req, res){
+  var id = req.params.id;
+  db.Truck.findOneAndRemove({_id: id}, function(err, truck){
+    if(err){console.log(err);}
+    console.log("REMOVED TRUCK");
+    res.sendStatus(204);
+  })
+})
+
 
 /**********
  * SERVER *

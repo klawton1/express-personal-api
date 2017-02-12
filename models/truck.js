@@ -1,7 +1,8 @@
 var mongoose = require("mongoose");
 
 var truckSchema = new mongoose.Schema({
-	headChef: String,
+	name: String,
+	headChef: {type: String, default: "Group"},
 	locations: {type: [String], default: "Check Website for Calander"},
 	hours: {
 		type:{
@@ -16,8 +17,9 @@ var truckSchema = new mongoose.Schema({
 		default: "Check website for Calander"
 	},
 	website: String,
-	rating: Number,
 	image: String,
+	type: String,
+	hasRestaurant: Boolean
 });
 
 var Truck = mongoose.model("Truck", truckSchema);
