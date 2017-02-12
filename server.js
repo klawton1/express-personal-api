@@ -47,14 +47,18 @@ app.get('/api', function apiIndex(req, res) {
   // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
   // It would be seriously overkill to save any of this to your database.
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: false, // CHANGE ME ;)
+    woopsIForgotToDocumentAllMyEndpoints: false,
     message: "Welcome to my personal api! Here's what you need to know!",
     documentationUrl: "https://github.com/klawton1/express-personal-api/blob/master/README.md",
-    baseUrl: "https://murmuring-depths-92485.herokuapp.com", // CHANGE ME
+    baseUrl: "https://murmuring-depths-92485.herokuapp.com",
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
+      {method: "GET", path: "/api/profile", description: "Data about the developer"},
+      {method:"GET", path: "/api/trucks", description: "Get data about food trucks"},
+      {method:"GET", path: "/api/trucks/:id", description: "Find a food truck by id"},
+      {method: "POST", path: "/api/trucks", description: "Create a new food truck item"},
+      {method:"PUT", path: "/api/trucks/:id", description: "Update a food truck's information"},
+      {method:"DELETE", path: "/api/trucks", description: "Delete a food truck from the database"}
     ]
   })
 });
@@ -65,8 +69,7 @@ app.get('/api/profile', function(req, res){
     githubLink: "https://github.com/klawton1",
     githubImage: "https://avatars3.githubusercontent.com/u/23528010?v=3&s=460",
     personalSiteLink: "url",
-    currentCity: "San Francisco",
-    pets: "None :("
+    currentCity: "San Francisco"
   }
   res.send(kody);
 })
@@ -74,7 +77,8 @@ app.get('/api/profile', function(req, res){
 app.get('/api/trucks', function(req, res){
   db.Truck.find({}, function(err, trucks){
     if(err){console.log("ERROR!!", err);}
-    console.log(trucks)
+    var limit = Number(req.query.limit);
+    var trucks = trucks.slice(0, limit);
     res.json(trucks)
   })
 })
@@ -89,28 +93,29 @@ app.get('/api/trucks/:id', function(req, res){
 })
 
 app.post('/api/trucks', function(req, res){
-  var chef = req.body.headChef;
-  var name = req.body.name;
-  var image = req.body.image;
-  var website = req.body.website;
-  var truck = {
-    headChef: headChef,
-    name: name,
-    website: website
+  var body = req.body;
+  var truck = {}
+  for(key in body){
+    if(body[key]){
+      truck[key] = body[key];
+    }
   }
   db.Truck.create(truck, function(err, truck){
     if(err){console.log(err);}
     console.log("MADE NEW TRUCK -", truck.name);
-    res.json(truck);
+    res.json("truck");
   })
 })
 
 app.put('/api/trucks/:id', function(req, res){
   var id = req.params.id;
   db.Truck.findOne({_id: id}, function(err, truck){
-    truck.headChef = req.body.chef;
-    truck.name = req.body.name;
-    truck.website = req.body.website
+    var body = req.body;
+    for(key in body){
+      if(body[key]){
+        truck[key] = body[key];
+      }
+    }
     truck.save(function(err, truck){
       console.log("UPDATED TRUCK", truck.name)
       res.json(truck);
