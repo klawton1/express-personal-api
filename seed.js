@@ -75,7 +75,7 @@ var foodTrucks = [
 			sunday: "5:30pm - 10pm"
 		},
 		image: "https://cdn.psfk.com/wp-content/uploads/2012/07/Del_Popolo_3.jpg",
-		type: "Pizza",
+		type: "Italian",
 		hasRestaurant: true,
 		contacts: delPopo
 
@@ -153,7 +153,7 @@ var foodTrucks = [
 	},
 	{
 		name: "Koja Kitchen",
-		iamge: "http://uploads.webflow.com/5589eda48397dc760e2bdcff/55beabe1ae9f367742ed1f26_TruckImageHeadPic.jpg",
+		image: "http://uploads.webflow.com/5589eda48397dc760e2bdcff/55beabe1ae9f367742ed1f26_TruckImageHeadPic.jpg",
 		type: "Korean-Japanese",
 		locations: ["343 Clement Street"],
 		hasRestaurant: true,

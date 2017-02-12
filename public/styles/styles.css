@@ -12,3 +12,11 @@ h1 {
 form{
 	display: none;
 }
+.truck-pic{
+	height: 100%;
+	width: 100%;
+}
+.right-side{
+	background-color: red;
+	height: 100%;
+}

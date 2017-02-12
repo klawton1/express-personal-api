@@ -24,16 +24,17 @@
           <h4><a href="/api">Read My API Documentation</a></h4>
         </div>
       </div>
-      <button class="btn">Add a Truck!</button>
+      <button class="btn btn-default add-truck">Add a Truck!</button>
       <form>
           <label>Name:</label><input class="form-control" type="text" name="name">
           <label>Image:</label><input class="form-control" type="text" name="image">
           <label>Type:</label><input class="form-control" type="text" name="type">
-          <label>Location:</label><input class="form-control" type="text" name="twitter">
-          <input type="submit" value= "SUBMIT">
+          <label>Location:</label><input class="form-control" type="text" name="location">
+          <input id="submit" type="submit" class="btn btn-default add-truck" value="Submit">
       </form>
       <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 truck">Testing</div>
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 trucks"></div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 right-side"></div>
       </div>
     </div>
   </body>

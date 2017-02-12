@@ -69,7 +69,7 @@ app.get('/api/profile', function(req, res){
     name: "Kody Lawton",
     githubLink: "https://github.com/klawton1",
     githubImage: "https://avatars3.githubusercontent.com/u/23528010?v=3&s=460",
-    personalSiteLink: "url",
+    personalSiteLink: "https://klawton1.github.io/",
     currentCity: "San Francisco"
   }
   res.send(kody);
@@ -101,12 +101,18 @@ app.post('/api/trucks', function(req, res){
   var truck = {}
   for(key in body){
     if(body[key]){
+      console.log("KEY", key, "location");
+      if(key === "locations"){
+        truck[key] = body[key];
+        console.log("NEW LOCATION", truck.locations)
+      }
       truck[key] = body[key];
     }
   }
+  console.log("NEW TRUCK:", truck);
   db.Truck.create(truck, function(err, truck){
     if(err){console.log(err);}
-    res.json("truck");
+    res.send(truck);
   })
 })
 
