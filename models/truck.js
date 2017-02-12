@@ -1,9 +1,16 @@
 var mongoose = require("mongoose");
 
+var contactSchema = new mongoose.Schema({
+	twitter: String,
+	facebook: String,
+	website: String,
+	phone: String
+})
+
 var truckSchema = new mongoose.Schema({
 	name: String,
-	headChef: {type: String, default: "Group"},
-	locations: {type: [String], default: "Check Website for Calander"},
+	headChef: {type: String},
+	locations: {type: [String], default: "Check contacts for more info"},
 	hours: {
 		type:{
 			monday: String,
@@ -14,12 +21,12 @@ var truckSchema = new mongoose.Schema({
 			saturday: String,
 			sunday: String
 		},
-		default: "Check website for Calander"
+		default: "Check contacts for more info"
 	},
-	website: String,
 	image: String,
 	type: String,
-	hasRestaurant: Boolean
+	hasRestaurant: Boolean,
+	contacts: [contactSchema]
 });
 
 var Truck = mongoose.model("Truck", truckSchema);

@@ -54,11 +54,12 @@ app.get('/api', function apiIndex(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about the developer"},
-      {method:"GET", path: "/api/trucks", description: "Get data about food trucks"},
-      {method:"GET", path: "/api/trucks/:id", description: "Find a food truck by id"},
+      {method: "GET", path: "/api/trucks", description: "Get data about food trucks"},
+      {method: "GET", path: "/api/trucks/:id", description: "Find a food truck by id"},
+      {method: "GET", path: "/api/trucks/:id/contacts", description: "get contact info for a specific truck"},
       {method: "POST", path: "/api/trucks", description: "Create a new food truck item"},
-      {method:"PUT", path: "/api/trucks/:id", description: "Update a food truck's information"},
-      {method:"DELETE", path: "/api/trucks", description: "Delete a food truck from the database"}
+      {method: "PUT", path: "/api/trucks/:id", description: "Update a food truck's information"},
+      {method: "DELETE", path: "/api/trucks", description: "Delete a food truck from the database"},
     ]
   })
 });
@@ -129,6 +130,14 @@ app.delete('/api/trucks/:id', function(req, res){
   db.Truck.findOneAndRemove({_id: id}, function(err, truck){
     if(err){console.log(err);}
     res.sendStatus(204);
+  })
+})
+
+app.get('/api/trucks/:id/contacts', function(req, res){
+  var id = req.params.id;
+  db.Truck.findOne({_id: id}, function(err, truck){
+    console.log(truck.contacts);
+    res.json(truck.contacts)
   })
 })
 
