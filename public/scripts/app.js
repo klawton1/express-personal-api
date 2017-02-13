@@ -1,4 +1,3 @@
-console.log("Sanity Check: JS is working!");
 
 $(document).ready(function(){
 	var div = $(`
@@ -47,7 +46,6 @@ $(document).ready(function(){
 			var pTag = $(this).siblings('p');
 			var parent = $(this).parents('.truck');
 			var id = pTag.text();
-			console.log(parent);
 			$.ajax({
 				method: "DELETE",
 				url: `/api/trucks/${id}`,
@@ -84,8 +82,14 @@ $(document).ready(function(){
 					</select>
 					<input type="text" id="socialMedia">
 			        <input type="submit" value="update">
+			        <br>
+					<button class="btn btn-default">cancel</button>
 				</form>
-			`)
+			`);
+			$('.right-side button').on('click', function(event){
+				event.preventDefault();
+				$('.right-side').html("");
+			})
 
 			$('.right-side input:submit').on('click', function(event){
 				event.preventDefault();
@@ -110,18 +114,17 @@ $(document).ready(function(){
 					data.contacts = {}
 					data.contacts[selected] = socialAddress
 				}
-				console.log(data)
 				if(jQuery.isEmptyObject(data)){
-					console.log("YES")
+					console.log("DONT DO THAT")
 				}else{
 					$.ajax({
 						method: "PUT",
 						url: `/api/trucks/${id}`,
 						data: data,
 						success: function(json){
+							
 							console.log(json);
 						}
-
 					})
 				}
 			})
@@ -154,7 +157,6 @@ $(document).ready(function(){
 					data: data,
 					success: function(json){
 						var truck = json;
-						console.log(truck.contacts._id);
 						$(".trucks").append(`
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 truck">
 								<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
@@ -176,7 +178,6 @@ $(document).ready(function(){
 							var pTag = $(this).siblings('p');
 							var parent = $(this).parents('.truck');
 							var id = pTag.text();
-							console.log(parent);
 							$.ajax({
 								method: "DELETE",
 								url: `/api/trucks/${id}`,
@@ -189,7 +190,5 @@ $(document).ready(function(){
 				})	
 			}
 		})
-
 	}
-
 });
