@@ -24,17 +24,16 @@
           <h4><a href="/api">Read My API Documentation</a></h4>
         </div>
       </div>
-      <button class="btn btn-default add-truck">Add a Truck!</button>
-      <form>
-          <label>Name:</label><input class="form-control" type="text" name="name">
-          <label>Image:</label><input class="form-control" type="text" name="image">
-          <label>Type:</label><input class="form-control" type="text" name="type">
+      <button class="btn btn-default add-truck" id="add">Add a Truck</button>
+      <form id="new-truck">
+          <label>Name:</label><input class="form-control required" type="text" name="name">
+          <label>Image:</label><input class="form-control required" type="text" name="image">
+          <label>Type:</label><input class="form-control required" type="text" name="type">
           <label>Location:</label><input class="form-control" type="text" name="location">
-          <input id="submit" type="submit" class="btn btn-default add-truck" value="Submit">
+          <input id="submit" type="submit" class="btn btn-default" value="Submit">
       </form>
       <div class="row">
-        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 trucks"></div>
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 right-side"></div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 trucks"></div>
       </div>
     </div>
   </body>
