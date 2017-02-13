@@ -77,7 +77,7 @@ app.get('/api/profile', function(req, res){
 
 app.get('/api/trucks', function(req, res){
   db.Truck.find({}, function(err, trucks){
-    if(err){console.log("ERROR!!", err);}
+    if(err){console.log(err);}
     if(req.query.limit === undefined){
       res.json(trucks);
     }else{
@@ -101,15 +101,12 @@ app.post('/api/trucks', function(req, res){
   var truck = {}
   for(key in body){
     if(body[key]){
-      console.log("KEY", key, "location");
       if(key === "locations"){
         truck[key] = body[key];
-        console.log("NEW LOCATION", truck.locations)
       }
       truck[key] = body[key];
     }
   }
-  console.log("NEW TRUCK:", truck);
   db.Truck.create(truck, function(err, truck){
     if(err){console.log(err);}
     res.send(truck);
@@ -122,7 +119,14 @@ app.put('/api/trucks/:id', function(req, res){
     var body = req.body;
     for(key in body){
       if(body[key]){
+        if(key === "contacts"){
+          for(contact in body.contacts){
+            truck.contacts[contact] = body.contacts[contact];
+          }
+        }
+        else{
         truck[key] = body[key];
+        }
       }
     }
     truck.save(function(err, truck){
@@ -142,7 +146,6 @@ app.delete('/api/trucks/:id', function(req, res){
 app.get('/api/trucks/:id/contacts', function(req, res){
   var id = req.params.id;
   db.Truck.findOne({_id: id}, function(err, truck){
-    console.log(truck.contacts);
     res.json(truck.contacts)
   })
 })

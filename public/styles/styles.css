@@ -9,7 +9,7 @@ h1 {
   text-align: center;
 }
 
-form{
+#new-truck{
 	display: none;
 }
 .truck-pic{
@@ -19,4 +19,17 @@ form{
 .truck{
 	margin-top: 20px;
 	margin-bottom: 60px;
+}
+.delete{
+	height: 20px;
+	width: 20px;
+	background-image: url("http://www.clker.com/cliparts/e/0/f/4/12428125621652493290X_mark_18x18_02.svg.hi.png");
+	background-size: 100% 100%;
+	margin-right: 30px;
+}
+.delete:hover{
+	background-color: red;
+}
+.right-side form{
+	position: fixed;
 }
