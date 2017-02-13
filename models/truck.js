@@ -26,7 +26,7 @@ var truckSchema = new mongoose.Schema({
 	image: String,
 	type: String,
 	hasRestaurant: Boolean,
-	contacts: [contactSchema]
+	contacts: {type: contactSchema, default: {}}
 });
 
 var Truck = mongoose.model("Truck", truckSchema);
