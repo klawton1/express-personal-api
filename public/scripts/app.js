@@ -92,6 +92,14 @@ $(document).ready(function(){
 								<div>
 								<h3 class="truck-name">${truck.name}    <small>${truck.type}</small></h3>
 								<p hidden>${truck._id}</p>
+								<button class="btn btn-default edit">Edit Info</button>
+								<button class="btn btn-default delete">Delete</button>
+								<select>
+									<option>twitter</option>
+									<option>facebook</option>
+									<option>website</option>
+									<option>phone</option>
+								</select>
 							</div>
 						`);
 					}
