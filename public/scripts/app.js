@@ -9,6 +9,7 @@ $(document).ready(function(){
 
 	})
 
+	
 	function onSuccess(json){
 		var trucks = json;
 		$(".trucks").html("");
@@ -102,6 +103,19 @@ $(document).ready(function(){
 								</select>
 							</div>
 						`);
+						$('.delete').on('click', function(){
+							var pTag = $(this).siblings('p');
+							var parent = $(this).parents('.truck');
+							var id = pTag.text();
+							console.log(parent);
+							$.ajax({
+								method: "DELETE",
+								url: `/api/trucks/${id}`,
+								success: function(result){
+									parent.remove();
+								}
+							})
+						})
 					}
 				})	
 			}
